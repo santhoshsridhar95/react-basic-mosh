@@ -6,7 +6,11 @@ import { produce } from "immer";
 import NavBar from "./components/NavBar";
 import CartItems from "./components/CartItems";
 import ExpandableText from "./components/ExpandableText";
-
+import Form from "./components/Form/FormUsingUseRef";
+import FormUsingUseRef from "./components/Form/FormUsingUseRef";
+import FormUsingUseState from "./components/Form/FormUsingUseState";
+import FormUsingReactHookForm from "./components/Form/FormUsingReactHookForm";
+import FormUsingReactHookFormUsingZod from "./components/Form/FormUsingReactHookFormUsingZod";
 function App() {
   let items = ["Bengaluru", "Mumbai", "Chennai", "Hyderabad"];
   const [alertVisible, setAlertVisible] = useState(false);
@@ -116,6 +120,14 @@ function App() {
           asperiores commodi voluptate earum, quis quisquam repudiandae,
           similique architecto nobis pariatur incidunt et.
         </ExpandableText>
+      </div>
+
+      <div>
+        <h4>Forms </h4>
+        <FormUsingUseRef></FormUsingUseRef>
+        <FormUsingUseState></FormUsingUseState>
+        <FormUsingReactHookForm></FormUsingReactHookForm>
+        <FormUsingReactHookFormUsingZod></FormUsingReactHookFormUsingZod>
       </div>
     </>
   );
