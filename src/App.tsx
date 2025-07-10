@@ -6,11 +6,20 @@ import { produce } from "immer";
 import NavBar from "./components/NavBar";
 import CartItems from "./components/CartItems";
 import ExpandableText from "./components/ExpandableText";
-import Form from "./components/Form/FormUsingUseRef";
-import FormUsingUseRef from "./components/Form/FormUsingUseRef";
-import FormUsingUseState from "./components/Form/FormUsingUseState";
-import FormUsingReactHookForm from "./components/Form/FormUsingReactHookForm";
-import FormUsingReactHookFormUsingZod from "./components/Form/FormUsingReactHookFormUsingZod";
+import Form from "./components/form/FormUsingUseRef";
+import FormUsingUseRef from "./components/form/FormUsingUseRef";
+import FormUsingUseState from "./components/form/FormUsingUseState";
+import FormUsingReactHookForm from "./components/form/FormUsingReactHookForm";
+import FormUsingReactHookFormUsingZod from "./components/form/FormUsingReactHookFormUsingZod";
+import UseEffect from "./components/use_effect/UseEffect";
+import ProductList from "./components/use_effect/ProductList";
+import CategoryList from "./components/use_effect/CategoryList";
+import EffectCleanUp from "./components/use_effect/EffectCleanUp";
+import User from "./components/use_effect/connecting_to_backend/user/User";
+import UserCancellingRequest from "./components/use_effect/connecting_to_backend/user/UserCancellingRequest";
+import User_DeleteData from "./components/use_effect/connecting_to_backend/user/User_CUD_operation";
+import User_CUD_operation from "./components/use_effect/connecting_to_backend/user/User_CUD_operation";
+import User_CUD_operation_Reusable_api from "./components/use_effect/connecting_to_backend/user/User_CUD_operation_Reusable_api";
 function App() {
   let items = ["Bengaluru", "Mumbai", "Chennai", "Hyderabad"];
   const [alertVisible, setAlertVisible] = useState(false);
@@ -27,6 +36,9 @@ function App() {
   ]);
 
   const [products, setProducts] = useState(["Clock", "Laptop"]);
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [error, setError] = useState("");
 
   function handleSelectedItem(item: string) {
     console.log(item);
@@ -128,6 +140,24 @@ function App() {
         <FormUsingUseState></FormUsingUseState>
         <FormUsingReactHookForm></FormUsingReactHookForm>
         <FormUsingReactHookFormUsingZod></FormUsingReactHookFormUsingZod>
+      </div>
+
+      <div className="mb-3">
+        <h4>UseEffect</h4>
+        <UseEffect />
+        <ProductList category={selectedCategory} />
+        <CategoryList setSelectedCategory={(cat) => setSelectedCategory(cat)} />
+        <ProductList category={selectedCategory} />
+        <EffectCleanUp />
+      </div>
+      <div className="mb-3">
+        <h4>Fetching Data from backend</h4>
+        {error && <p className="text-danger">{error}</p>}
+        <h3>handling error</h3>
+        <User setError={(err) => setError(err)} />
+        <UserCancellingRequest setError={(err) => setError(err)} />
+        <User_CUD_operation setError={(err) => setError(err)} />
+        <User_CUD_operation_Reusable_api setError={(err) => setError(err)} />
       </div>
     </>
   );
